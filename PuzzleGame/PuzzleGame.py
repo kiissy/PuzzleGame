@@ -68,24 +68,8 @@ endButton.onMouseAction = endButton_onMouse
 
 def puzzle_onMouseAction(x, y, action):
     global blankPos, shufflePos, startTime, endTime, curTime, bestTime
+    print(x, y)
 
-    if (blankPos[0] - 180 < x < blankPos[0]) and (blankPos[1] < y < blankPos[1] + 180):
-        swapPos = shufflePos.index((blankPos[0] - 180, blankPos[1]))
-        shufflePos[blankPos], shuffle[swapPos] = shuffle[swapPos], shufflePos[blankPos]
-
-    elif (blankPos[0] + 180 < x < blankPos[0] + 360) and (blankPos[1] < y < blankPos[1] + 180):
-        swapPos = shufflePos.index((blankPos[0] + 180, blankPos[1]))
-        shufflePos[blankPos], shuffle[swapPos] = shuffle[swapPos], shufflePos[blankPos]
-
-    elif (blankPos[0] < x < blankPos[0] + 180) and (blankPos[1] - 180 < y < blankPos[1]):
-        swapPos = shufflePos.index((blankPos[0], blankPos[1] - 180))
-        shufflePos[blankPos], shuffle[swapPos] = shuffle[swapPos], shufflePos[blankPos]
-
-    elif (blankPos[0] < x < blankPos[0] + 180) and (blankPos[1] + 180 < y < blankPos[1] + 360):
-        swapPos = shufflePos.index((blankPos[0], blankPos[1] + 180))
-        shufflePos[blankPos], shuffle[swapPos] = shuffle[swapPos], shufflePos[blankPos]
-
-    setPos(shufflePos)
     showPuzzles()
 
     if endPuzzle():
@@ -98,6 +82,7 @@ def puzzle_onMouseAction(x, y, action):
         startButton.setImage('images/restart.png')
         startButton.show()
         endButton.show()
-puzzle.onMouseAction = puzzle_onMouseAction
+for puzzle in puzzles:
+    puzzle.onMouseAction = puzzle_onMouseAction
 
 startGame(scene)
