@@ -5,7 +5,7 @@ import random
 setGameOption(GameOption.INVENTORY_BUTTON,False)
 setGameOption(GameOption.MESSAGE_BOX_BUTTON,False)
 
-scene = Scene("퍼즐게임", "images/배경.png")
+scene = Scene("퍼즐게임4", "images/배경.png")
 
 def find_index(object):
     for index in range(16):
@@ -41,22 +41,37 @@ def random_move():
         if movable(index): break
     move(index)
 
-def onMouseAction_piece(object, x, y, action):
-    index = find_index(object)
+class Piece(Object):
+    def __init__(self, file, scene, x, y):
+        super().__init__(file)
+        self.locate(scene, x, y)
+        self.show()
 
-    if movable(index):
-        move(index)
+    def onMouseAction(self, x, y, action):
+        index = find_index(self)
 
-        if completed():
-            showMessage("Completed!!")
-Object.onMouseActionDefault = onMouseAction_piece
+        if movable(index):
+            move(index)
+
+            if completed():
+                showMessage("Completed!!")
 
 game_board = []
 init_board = []
 for index in range(16):
-    piece = Object("images/" + str(index + 1) + ".png")
-    piece.locate(scene, 300 + 150*(index%4), 470 - 150*(index//4))
-    piece.show()
+    piece = Piece("images/" + str(index + 1) + ".png", scene, 300 + 150*(index%4), 470 - 150*(index//4))
+
+    #def onMouseAction_piece(x, y, action, object = piece):
+    #    index = find_index(object)
+
+    #    if movable(index):
+    #        move(index)
+
+    #        if completed():
+    #            showMessage("Completed!!")
+
+    #piece.onMouseAction = onMouseAction_piece
+    #piece.onMouseAction = lambda x, y, action, object=piece : onMouseAction_piece(object)
 
     game_board.append(piece)
     init_board.append(piece)

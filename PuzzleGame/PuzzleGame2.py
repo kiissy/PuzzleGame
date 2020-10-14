@@ -5,7 +5,7 @@ import random
 setGameOption(GameOption.INVENTORY_BUTTON,False)
 setGameOption(GameOption.MESSAGE_BOX_BUTTON,False)
 
-scene = Scene("퍼즐게임", "images/배경.png")
+scene = Scene("퍼즐게임2", "images/배경.png")
 
 def find_index(object):
     for index in range(16):
@@ -41,16 +41,6 @@ def random_move():
         if movable(index): break
     move(index)
 
-def onMouseAction_piece(object, x, y, action):
-    index = find_index(object)
-
-    if movable(index):
-        move(index)
-
-        if completed():
-            showMessage("Completed!!")
-Object.onMouseActionDefault = onMouseAction_piece
-
 game_board = []
 init_board = []
 for index in range(16):
@@ -60,6 +50,23 @@ for index in range(16):
 
     game_board.append(piece)
     init_board.append(piece)
+
+board = Object("images/투명.png")
+board.locate(scene, 300, 20)
+board.show()
+
+def find_index(x, y):
+    return x // 150 + 4 * ((600-y) // 150)
+
+def onMouseAction_piece(x, y, action):
+    index = find_index(x, y)
+
+    if movable(index):
+        move(index)
+
+        if completed():
+            showMessage("completed!!")
+board.onMouseAction = onMouseAction_piece
 
 blank = 15
 game_board[15].hide()

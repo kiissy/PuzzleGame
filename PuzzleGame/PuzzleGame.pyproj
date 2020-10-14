@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fa36c478-da02-4b9e-b9e0-c3f509b6e133</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PuzzleGame.py</StartupFile>
+    <StartupFile>PuzzleGame4.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PuzzleGame4.py" />
+    <Compile Include="PuzzleGame3.py" />
+    <Compile Include="PuzzleGame2.py" />
     <Compile Include="PuzzleGame.py" />
   </ItemGroup>
   <ItemGroup>
